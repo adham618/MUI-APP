@@ -1,6 +1,19 @@
+import { KeyboardArrowRight } from "@mui/icons-material"
 import { Button, ButtonGroup, Container, Typography } from "@mui/material"
+import { makeStyles } from '@mui/styles'
+
+const useStyles = makeStyles({
+  root: {
+    fontSize: 60,
+    backgroundColor: 'red',
+    "&:hover": {
+      backgroundColor: "blue"
+    }
+  },
+});
 
 const Create = () => {
+  const classes = useStyles()
   return (
     <Container>
       <Typography
@@ -12,10 +25,12 @@ const Create = () => {
         Create a New Note
       </Typography>
       <Button
+        className={classes.root}
         onClick={() => { console.log("clicked") }}
         type="submit"
         color="secondary"
         variant="contained"
+        endIcon={<KeyboardArrowRight />}
       >
         Submit
       </Button>
