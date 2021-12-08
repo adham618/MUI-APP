@@ -1,19 +1,27 @@
 import { KeyboardArrowRight } from "@mui/icons-material"
 import { Button, ButtonGroup, Container, Typography } from "@mui/material"
-import { makeStyles } from '@mui/styles'
-
-const useStyles = makeStyles({
-  root: {
-    fontSize: 60,
-    backgroundColor: 'red',
-    "&:hover": {
-      backgroundColor: "blue"
-    }
-  },
-});
+import TextField from '@mui/material/TextField';
+import { useState } from "react";
 
 const Create = () => {
-  const classes = useStyles()
+  const [title, setTitle] = useState('')
+  const [details, setDetails] = useState('')
+  const [titleError, setTitleError] = useState(false)
+  const [detailsError, setDetailsError] = useState(false)
+  const handleSubmit = e => {
+    e.preventDefault()
+    setTitleError(false)
+    setDetailsError(false)
+    if (title == "") {
+      setTitleError(true)
+    }
+    if (details == "") {
+      setDetailsError(true)
+    }
+    if (title && details) {
+      console.log(title, details)
+    }
+  }
   return (
     <Container>
       <Typography
@@ -24,17 +32,47 @@ const Create = () => {
       >
         Create a New Note
       </Typography>
-      <Button
-        className={classes.root}
-        onClick={() => { console.log("clicked") }}
-        type="submit"
-        color="secondary"
-        variant="contained"
-        endIcon={<KeyboardArrowRight />}
-      >
-        Submit
-      </Button>
-
+      <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+        <TextField
+          onChange={e => setTitle(e.target.value)}
+          sx={{
+            marginTop: '20px',
+            marginBottom: '20px',
+            display: 'block'
+          }}
+          label="Note Title"
+          variant="outlined"
+          color="secondary"
+          fullWidth
+          error={titleError}
+          required
+        />
+        <TextField
+          onChange={e => setDetails(e.target.value)}
+          sx={{
+            marginTop: '20px',
+            marginBottom: '20px',
+            display: 'block'
+          }}
+          label="Details"
+          variant="outlined"
+          color="secondary"
+          fullWidth
+          multiline
+          rows={4}
+          error={detailsError}
+          required
+        />
+        <Button
+          onClick={() => { console.log("clicked") }}
+          type="submit"
+          color="secondary"
+          variant="contained"
+          endIcon={<KeyboardArrowRight />}
+        >
+          Submit
+        </Button>
+      </form>
     </Container>
   )
 }
