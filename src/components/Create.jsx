@@ -1,5 +1,5 @@
-import { KeyboardArrowRight } from "@mui/icons-material"
-import { Button, ButtonGroup, Container, Typography } from "@mui/material"
+import { Block, KeyboardArrowRight } from "@mui/icons-material"
+import { Button, ButtonGroup, Container, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, Typography } from "@mui/material"
 import TextField from '@mui/material/TextField';
 import { useState } from "react";
 
@@ -8,6 +8,7 @@ const Create = () => {
   const [details, setDetails] = useState('')
   const [titleError, setTitleError] = useState(false)
   const [detailsError, setDetailsError] = useState(false)
+  const [category, setCategory] = useState('');
   const handleSubmit = e => {
     e.preventDefault()
     setTitleError(false)
@@ -19,7 +20,7 @@ const Create = () => {
       setDetailsError(true)
     }
     if (title && details) {
-      console.log(title, details)
+      console.log(title, details, category)
     }
   }
   return (
@@ -63,12 +64,24 @@ const Create = () => {
           error={detailsError}
           required
         />
+
+        <FormControl sx={{ marginTop: '20px', marginBottom: '20px', display: "block" }}>
+          <FormLabel>Note Category</FormLabel>
+          <RadioGroup value={category} onChange={e => setCategory(e.target.value)}>
+            <FormControlLabel value="money" control={<Radio color="secondary" />} label="Money" />
+            <FormControlLabel value="todos" control={<Radio color="secondary" />} label="Todos" />
+            <FormControlLabel value="reminders" control={<Radio color="secondary" />} label="Reminders" />
+            <FormControlLabel value="work" control={<Radio color="secondary" />} label="Work" />
+          </RadioGroup>
+        </FormControl>
+
         <Button
           onClick={() => { console.log("clicked") }}
           type="submit"
           color="secondary"
           variant="contained"
           endIcon={<KeyboardArrowRight />}
+          sx={{ marginTop: '10px' }}
         >
           Submit
         </Button>
