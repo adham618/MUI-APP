@@ -50,7 +50,7 @@ const Layout = ({ children }) => {
         anchor="left"
       >
         <div>
-          <Typography variant="h5">
+          <Typography variant="h5" sx={{ padding: "20px" }}>
             Ninja Note
           </Typography>
         </div>
