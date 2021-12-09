@@ -11,6 +11,7 @@ const Create = () => {
   const [detailsError, setDetailsError] = useState(false)
   const [category, setCategory] = useState('');
   const navigate = useNavigate()
+
   const handleSubmit = e => {
     e.preventDefault()
     setTitleError(false)
@@ -29,6 +30,7 @@ const Create = () => {
       }).then(navigate("/"))
     }
   }
+
   return (
     <Container>
       <Typography
@@ -92,7 +94,7 @@ const Create = () => {
           Submit
         </Button>
       </form>
-    </Container>
+    </Container >
   )
 }
 
